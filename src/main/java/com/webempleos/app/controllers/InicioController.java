@@ -30,12 +30,9 @@ public class InicioController {
     @GetMapping(value = "/ingresar")
     public String ingreso(Authentication authentication, HttpSession session) {
         String username = authentication.getName();
-
-        if(session.getAttribute("usuario")==null){
             Usuario usuario=usuarioService.findByUsername(username).orElse(null);
             usuario.setPassword(null);
             session.setAttribute("usuario",usuario);
-        }
         return "redirect:/usuarios/listar";
     }
 

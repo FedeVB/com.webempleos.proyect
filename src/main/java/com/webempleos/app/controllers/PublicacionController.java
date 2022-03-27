@@ -42,13 +42,6 @@ public class PublicacionController {
     @Autowired
     private CategoriaService categoriaService;
 
-//    @GetMapping("/listar")
-//    public String listar(Model model) {
-//        model.addAttribute("titulo", "Listado de publicaciones");
-//        model.addAttribute("publicaciones", publicacionService.findAll());
-//        return "listar-publicacion";
-//    }
-
     @GetMapping(value = "/listar")
     public String listar(Pageable page, Model model) {
         model.addAttribute("titulo", "Listado de publicaciones");
@@ -68,7 +61,6 @@ public class PublicacionController {
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(valorBusqueda);
         publicacion.setDescripcion(valorBusqueda);
-        publicacion.setCategoria(new Categoria(valorBusqueda));
         model.addAttribute("titulo", "Listado de publicaciones");
 
         Specification<Publicacion> especificacionBusqueda = PublicacionSpecification.publicacionSpecification(publicacion);

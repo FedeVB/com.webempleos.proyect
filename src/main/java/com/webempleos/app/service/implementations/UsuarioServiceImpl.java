@@ -12,7 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,6 +72,10 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         List<GrantedAuthority> autoridades = usuario.getAutoridades().stream()
                 .map(autoridad -> new SimpleGrantedAuthority(autoridad.getAutoridad()))
                 .collect(Collectors.toList());
+
+        ServletRequestAttributes servletRequestAttributes= (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session=servletRequestAttributes.getRequest().getSession(true);
+        session.setAttribute("usuario",usuario);
 
         return new User(usuario.getUsername(), usuario.getPassword(), usuario.isAlta(), usuario.isAlta(), usuario.isAlta(), usuario.isAlta(), autoridades);
     }

@@ -26,18 +26,6 @@ public class CategoriaController {
     @Autowired
     private PublicacionService publicacionService;
 
-//    @GetMapping(value = "/listar/{nombreCategoria}")
-//    public String porCategoria(@PathVariable(value = "nombreCategoria") String nombreCategoria, Model model) {
-//        List<Publicacion> publicaciones = publicacionService.findAllByCategoriaNombre(nombreCategoria);
-//        publicaciones.forEach(publicacion -> System.out.println(publicacion.getTitulo()));
-//        model.addAttribute("titulo", "Listado de publicaciones");
-//        if(publicaciones.isEmpty()){
-//            return "redirect:/publicaciones/listar";
-//        }
-//        model.addAttribute("publicaciones", publicaciones);
-//        return "listar-publicacion";
-//    }
-
     @GetMapping(value = "/listar/{nombreCategoria}")
     public String porCategoria(@PathVariable(value = "nombreCategoria") String nombreCategoria, Model model) {
         Publicacion publicacion = new Publicacion();
